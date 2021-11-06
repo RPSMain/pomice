@@ -169,7 +169,7 @@ class Rotation(Filter):
     the audio is being rotated around the listener's head
     """
 
-    def __init__(self, *, rotation_hertz: float = 5):
+    def __init__(self, *, rotation_hertz: float = 0.2):
         super().__init__()
 
         self.rotation_hertz = rotation_hertz
