@@ -69,20 +69,21 @@ class Player(VoiceProtocol):
     @property
     def position(self) -> float:
         """Property which returns the player's position in a track in milliseconds"""
+        current = self._current.original
 
-        if not self.is_playing or not self.current:
+        if not self.is_playing or not self._current:
             return 0
 
         if self.is_paused:
-            return min(self._last_position, self.current.original.length)
+            return min(self._last_position, current.length)
 
         difference = (time.time() * 1000) - self._last_update
         position = self._last_position + difference
 
-        if position > self.current.original.length:
+        if position > current.length:
             return 0
 
-        return min(position, self.current.original.length)
+        return min(position, current.length)
 
     @property
     def is_playing(self) -> bool:
@@ -275,7 +276,7 @@ class Player(VoiceProtocol):
 
     async def seek(self, position: float) -> float:
         """Seeks to a position in the currently playing track milliseconds"""
-        if not position or position < 0 or position > self.current.original.length:
+        if not position or position < 0 or position > self._current.original.length:
             raise TrackInvalidPosition(f"Seek position must be between 0 and the track length")
 
         await self._node.send(op="seek", guildId=str(self.guild.id), position=position)
