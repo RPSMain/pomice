@@ -296,7 +296,7 @@ class Node:
             spotify_results = await self._spotify_client.search(query=query)
 
             if isinstance(spotify_results, spotify.Track):
-                return Track(
+                return [Track(
                         track_id=spotify_results.id,
                         ctx=ctx,
                         spotify=True,
@@ -313,6 +313,7 @@ class Node:
                             "thumbnail": spotify_results.image
                         }
                     )
+               ]
 
             tracks = [
                 Track(
@@ -353,8 +354,9 @@ class Node:
             track: dict = data["tracks"][0]
             info: dict = track.get("info")
 
-            return Track(
+            return [Track(
                     track_id=track["track"],
+                    ctx=ctx,
                     info={
                         "identifier": info.get("identifier"),
                         "isSeekable": True,
@@ -365,9 +367,9 @@ class Node:
                         "sourceName": "http",
                         "title": discord_url.group("file"),
                         "uri": info.get("uri"),
-                    },
-                    ctx=ctx
-            )
+                    }
+                )
+            ]
 
         else:
             async with self._session.get(
@@ -393,7 +395,7 @@ class Node:
             )
 
         elif load_type == "SEARCH_RESULT" or load_type == "TRACK_LOADED":
-            result = [
+            return result := [
                 Track(
                     track_id=track["track"],
                     info=track["info"],
@@ -401,15 +403,6 @@ class Node:
                 )
                 for track in data["tracks"]
             ]
-
-            if len(result) == 1:
-                return result[1]
-            
-            return Playlist(
-                playlist_info={"name": "Unknown", "selectedTrack": 0},
-                tracks=result,
-                ctx=ctx
-            )
 
 class NodePool:
     """The base class for the node pool.
