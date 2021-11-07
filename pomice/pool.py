@@ -444,7 +444,7 @@ class NodePool:
             raise NoNodesAvailable("There are no nodes available.")
 
         if identifier is None:
-            return random.choice(list(available_nodes.values()))
+            return sorted(list(available_nodes.values()), key=lambda n: len(n.players))[0]
 
         return available_nodes.get(identifier, None)
 
