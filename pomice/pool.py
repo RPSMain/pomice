@@ -399,7 +399,8 @@ class Node:
                 Track(
                     track_id=track["track"],
                     info=track["info"],
-                    ctx=ctx
+                    ctx=ctx,
+                    search_type=search_type
                 )
                 for track in data["tracks"]
             ]
