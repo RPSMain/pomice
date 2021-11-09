@@ -20,7 +20,6 @@ from .exceptions import (
     NodeCreationError,
     NodeNotAvailable,
     NoNodesAvailable,
-    NoMatchesFound,
     TrackLoadError
 )
 from .objects import Playlist, Track
