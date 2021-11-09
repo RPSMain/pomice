@@ -395,7 +395,7 @@ class Node:
             )
 
         elif load_type == "SEARCH_RESULT" or load_type == "TRACK_LOADED":
-            return result := [
+            return (result := [
                 Track(
                     track_id=track["track"],
                     info=track["info"],
@@ -404,6 +404,7 @@ class Node:
                 )
                 for track in data["tracks"]
             ]
+        )
 
 class NodePool:
     """The base class for the node pool.
