@@ -298,8 +298,9 @@ class Player(VoiceProtocol):
         """Sets a filter of the player. Takes a pomice.Filter object.
            This will only work if you are using the development version of Lavalink.
         """
-        position = self.position if self.current else None
+        position = self.position if self._current else None
         await self._node.send(op="filters", guildId=str(self.guild.id), **filter.payload)
-        if position: self.seek(position)
+        if position: 
+            self.seek(position)
         self._filter = filter
         return filter
