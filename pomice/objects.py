@@ -78,7 +78,7 @@ class Playlist:
         if (index := playlist_info.get("selectedTrack")) == -1:
             self.selected_track = 0
         else:
-            self.selected_track = self.tracks[index]
+            self.selected_track = index
 
         self._thumbnail = thumbnail
         self._uri = uri
