@@ -390,7 +390,8 @@ class Node:
             return Playlist(
                 playlist_info=data["playlistInfo"],
                 tracks=data["tracks"],
-                ctx=ctx
+                ctx=ctx,
+                search_type=search_type
             )
 
         elif load_type == "SEARCH_RESULT" or load_type == "TRACK_LOADED":
