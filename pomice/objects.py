@@ -67,7 +67,7 @@ class Playlist:
         tracks: list,
         ctx: Optional[commands.Context] = None,
         spotify: bool = False,
-        search_type: SearchType = SearchType.ytsearch
+        search_type: SearchType = SearchType.ytsearch,
         thumbnail: Optional[str] = None,
         uri: Optional[str] = None,
     ):
