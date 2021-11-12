@@ -67,12 +67,14 @@ class Playlist:
         tracks: list,
         ctx: Optional[commands.Context] = None,
         spotify: bool = False,
+        search_type: SearchType = SearchType.ytsearch
         thumbnail: Optional[str] = None,
         uri: Optional[str] = None,
     ):
         self.playlist_info = playlist_info
         self.tracks_raw = tracks
         self.spotify = spotify
+        self._search_type = search_type
 
         self.name = playlist_info.get("name")
         if (index := playlist_info.get("selectedTrack")) == -1:
@@ -87,7 +89,7 @@ class Playlist:
             self.tracks = tracks
         else:
             self.tracks = [
-                Track(track_id=track["track"], info=track["info"], ctx=ctx)
+                Track(track_id=track["track"], info=track["info"], ctx=ctx, search_type=search_type)
                 for track in self.tracks_raw
             ]
 
