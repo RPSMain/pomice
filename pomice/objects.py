@@ -28,6 +28,7 @@ class Track:
 
         self.title = info.get("title")
         self.author = info.get("author")
+        self.thumbnail = info.get("thumbnail")
         self.length = info.get("length")
         self.ctx = ctx
         self.requester = self.ctx.author if ctx else None
