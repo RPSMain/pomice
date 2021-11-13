@@ -177,7 +177,7 @@ class Node:
                 await asyncio.sleep(retry)
 
                 if not self.is_connected:
-                    self._bot.loop.create_task(self.connect())
+                    await self.connect()
             else:
                 self._bot.loop.create_task(self._handle_payload(msg.json()))
 
