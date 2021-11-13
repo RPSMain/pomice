@@ -276,7 +276,7 @@ class Player(VoiceProtocol):
 
     async def seek(self, position: float) -> float:
         """Seeks to a position in the currently playing track milliseconds"""
-        if not position or position < 0 or position > self._current.original.length:
+        if position is None or position < 0 or position > self._current.original.length:
             raise TrackInvalidPosition(f"Seek position must be between 0 and the track length")
 
         await self._node.send(op="seek", guildId=str(self.guild.id), position=position)
