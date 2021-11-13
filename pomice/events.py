@@ -101,7 +101,7 @@ class TrackExceptionEvent(PomiceEvent):
 
 class WebSocketClosedPayload:
     def __init__(self, data: dict):
-        self.guild = NodePool.get_node().get_player(int(data["guildId"]))._guild
+        self.guild = NodePool.get_node().bot.get_guild(int(data["guildId"]))
         self.code: int = data["code"]
         self.reason: str = data["code"]
         self.by_remote: bool = data["byRemote"]
