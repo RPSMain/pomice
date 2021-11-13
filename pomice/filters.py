@@ -3,6 +3,12 @@ from .exceptions import FilterInvalidArgument
 
 
 class Filter:
+    """
+    The base class for all filters.
+    You can use these filters if you have the latest Lavalink version
+    installed. If you do not have the latest Lavalink version,
+    these filters will not work.
+    """
     def __init__(self):
         self.payload = None
 
