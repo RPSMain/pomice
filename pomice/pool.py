@@ -168,7 +168,7 @@ class Node:
                 return
 
     async def _listen(self):
-        backoff = ExponentialBackoff(base=7)
+        backoff = ExponentialBackoff()
 
         while True:
             msg = await self._websocket.receive()
