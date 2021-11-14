@@ -169,7 +169,7 @@ class Node:
                 return
 
     async def _listen(self):
-        backoff = Backoff(base=1, maximum_time=60, maximum_tries=None)
+        backoff = Backoff(base=1, maximum_time=50, maximum_tries=None)
 
         while True:
             assert isinstance(self._websocket, aiohttp.ClientWebSocketResponse)
@@ -179,7 +179,7 @@ class Node:
                 await asyncio.sleep(retry)
 
                 if not self.is_connected:
-                    await self.connect()
+                    self._bot.loop.create_task(self.connect())
             else:
                 self._bot.loop.create_task(self._handle_payload(msg.json()))
 
