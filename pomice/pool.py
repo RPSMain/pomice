@@ -171,6 +171,7 @@ class Node:
         backoff = ExponentialBackoff()
 
         while True:
+            assert isinstance(self._websocket, aiohttp.ClientWebSocketResponse)
             msg = await self._websocket.receive()
             if msg.type == aiohttp.WSMsgType.CLOSED:
                 retry = backoff.delay()
