@@ -28,7 +28,6 @@ from .exceptions import (
 )
 from .objects import Playlist, Track
 from .utils import ClientType, ExponentialBackoff, NodeStats
-from .backoff import Backoff
 
 if TYPE_CHECKING:
     from .player import Player
@@ -169,19 +168,19 @@ class Node:
                 return
 
     async def _listen(self):
-        backoff = Backoff(base=1, maximum_time=50, maximum_tries=None)
+        backoff = ExponentialBackoff(base=7)
 
         while True:
-            assert isinstance(self._websocket, aiohttp.ClientWebSocketResponse)
             msg = await self._websocket.receive()
             if msg.type == aiohttp.WSMsgType.CLOSED:
-                retry = backoff.calculate()
+                retry = backoff.delay()
                 await asyncio.sleep(retry)
 
                 if not self.is_connected:
                     self._bot.loop.create_task(self.connect())
             else:
                 self._bot.loop.create_task(self._handle_payload(msg.json()))
+
 
     async def _handle_payload(self, data: dict):
         op = data.get("op", None)
