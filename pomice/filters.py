@@ -10,7 +10,7 @@ class Filter:
     these filters will not work.
     """
     def __init__(self):
-        self.payload = None
+        self.payload = {}
 
 
 class Equalizer(Filter):
