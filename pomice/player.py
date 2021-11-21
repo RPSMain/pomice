@@ -301,6 +301,6 @@ class Player(VoiceProtocol):
         position = self.position if self._current else None
         await self._node.send(op="filters", guildId=str(self.guild.id), **filter.payload)
         if position: 
-            self.seek(position)
+            await self._node.send(op="seek", guildId=str(self.guild.id), position=position)
         self._filter = filter
         return filter
