@@ -27,7 +27,7 @@ from .exceptions import (
     TrackLoadError
 )
 from .objects import Playlist, Track
-from .utils import ClientType, ExponentialBackoff, NodeStats
+from .utils import ClientType, ExponentialBackoff, NodeStats, Ping
 
 if TYPE_CHECKING:
     from .player import Player
@@ -141,6 +141,11 @@ class Node:
     def pool(self):
         """Property which returns the pool this node is apart of"""
         return self._pool
+    
+    @property
+    def latency(self):
+        """Property which returns the latency of the node"""
+        return Ping(self._host, port=self._port).get_ping()
 
     async def _update_handler(self, data: dict):
         await self._bot.wait_until_ready()
