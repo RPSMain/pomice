@@ -392,8 +392,11 @@ class Node:
 
         load_type = data.get("loadType")
 
-        if not load_type or load_type == "NO_MATCHES":
-            raise TrackLoadError("There was an error while trying to load this track. [NO_MATCHES]")
+        if not load_type:
+            raise TrackLoadError("There was an error while trying to load this track. [NO_LOADTYPE]")
+
+        elif load_type == "NO_MATCHES":
+            raise TrackLoadError("No matches found. [NO_MATCHES]")
 
         elif load_type == "LOAD_FAILED":
             exception = data["exception"]
