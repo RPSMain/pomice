@@ -24,12 +24,12 @@ class Equalizer(Filter):
     def __init__(self, *, levels: list):
         super().__init__()
 
-        self.eq = self._factory(levels=levels)
+        self.eq = self._factory(self, levels)
         self.raw = levels
 
         self.payload = {"equalizer": {"bands": self.eq}}
 
-    def _factory(*, levels):
+    def _factory(self, levels: list):
         _dict = collections.defaultdict(int)
 
         _dict.update(levels)
@@ -39,7 +39,6 @@ class Equalizer(Filter):
 
     def __repr__(self) -> str:
         return f"<Pomice.EqualizerFilter eq={self.eq} raw={self.raw}>"
-
 
 class Timescale(Filter):
     """Filter which changes the speed and pitch of a track.
