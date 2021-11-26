@@ -245,7 +245,7 @@ class Player(VoiceProtocol):
         """Plays a track. If a Spotify track is passed in, it will be handled accordingly."""
         if track.spotify:
             search: Track = (await self._node.get_tracks(
-                f"{track._search_type}:{track.title} - {track.author}",
+                f"{track.title} - {track.author}",
                 ctx=track.ctx
             ))[0]
             track.original = search
