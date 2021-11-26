@@ -294,7 +294,7 @@ class Node:
            Context object on any track you search.
         """
 
-        if not URL_REGEX.match(query) and not local:
+        if not URL_REGEX.search(query) and not local:
             query = f"{search_type}:{query}"
 
         if SPOTIFY_URL_REGEX.match(query):
