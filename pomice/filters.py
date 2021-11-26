@@ -27,7 +27,7 @@ class Equalizer(Filter):
         self.eq = self._factory(levels)
         self.raw = levels
 
-        self.payload = {"equalizer": {"bands": self.eq}}
+        self.payload = {"equalizer": self.eq}
 
     @staticmethod
     def _factory(levels: list):
