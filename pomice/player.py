@@ -247,7 +247,7 @@ class Player(VoiceProtocol):
             try:
                 search = (await self._node.get_tracks(f"{track.title} - {track.author}", ctx=track.ctx, search_type=SearchType.ytmsearch))
             except:
-                search = (await self._node.get_tracks(f"{track.title} - {track.author}", ctx=track.ctx))
+                search = (await self._node.get_tracks(f"{track.title} - {track.author.split(', ')[0]} Official", ctx=track.ctx))
             search: Track = search[0]
             track.original = search
 
