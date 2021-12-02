@@ -11,6 +11,7 @@ from .playlist import Playlist
 from .track import Track
 
 GRANT_URL = "https://accounts.spotify.com/api/token"
+ARTIST_URL = "https://api.spotify.com/v1/artists/{id}"
 REQUEST_URL = "https://api.spotify.com/v1/{type}s/{id}"
 TOP_TRCKS_URL = "https://api.spotify.com/v1/artists/{id}/top-tracks?market=ES"
 SPOTIFY_URL_REGEX = re.compile(
@@ -120,7 +121,7 @@ class Client:
         if not self._bearer_token or time.time() >= self._expiry:
             await self._fetch_bearer_token()
 
-        request_url = REQUEST_URL.format(id=id)
+        request_url = ARTIST_URL.format(id=id)
 
         async with self.session.get(request_url, headers=self._bearer_headers) as resp:
             if resp.status != 200:
