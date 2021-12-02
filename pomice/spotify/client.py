@@ -83,7 +83,7 @@ class Client:
 
         elif spotify_type == "artist":
 
-            top_tracks = Artist(data, self.get_spoify_artist(spotify_id))
+            top_tracks = Artist(data, (await self.get_spoify_artist(spotify_id)))
 
             if not top_tracks.total_tracks:
                 raise SpotifyRequestException("This artist has no popular tracks and therefore cannot be queued.")
