@@ -11,7 +11,7 @@ class Artist:
         self.total_tracks = len(data["tracks"]) if data["tracks"] and len(data["tracks"]) else 0
         self.id = artist["id"]
         if artist.get("images") and len(artist["images"]):
-            self.image = artist["images"][0]["url"]
+            self.image = artist["images"][-1]["url"]
         else:
             self.image = None
         self.uri = artist["external_urls"]["spotify"]
