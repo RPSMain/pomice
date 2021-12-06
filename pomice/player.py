@@ -78,6 +78,10 @@ class Player(VoiceProtocol):
             return min(self._last_position, current.length)
 
         difference = (time.time() * 1000) - self._last_update
+        
+        if self._filter and isinstance(self._filter, pomice.Timescale):
+            difference = difference * self._filter.speed * self._filter.rate
+
         position = self._last_position + difference
 
         if position > current.length:
