@@ -469,8 +469,8 @@ class NodePool:
         password: str,
         identifier: str,
         secure: bool = False,
-        spotify_client_id: Optional[str],
-        spotify_client_secret: Optional[str],
+        spotify_client_id: Optional[str] = None,
+        spotify_client_secret: Optional[str] = None,
         session: Optional[aiohttp.ClientSession] = None,
     ) -> Node:
         """Creates a Node object to be then added into the node pool.
