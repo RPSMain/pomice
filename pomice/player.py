@@ -19,7 +19,7 @@ from . import events
 from .enums import SearchType
 from .events import PomiceEvent, TrackEndEvent, TrackStartEvent
 from .exceptions import TrackInvalidPosition
-from .filters import Filter
+from .filters import Filter, Timescale
 from .objects import Track
 from .pool import Node, NodePool
 from .utils import ClientType
@@ -79,7 +79,7 @@ class Player(VoiceProtocol):
 
         difference = (time.time() * 1000) - self._last_update
         
-        if self._filter and isinstance(self._filter, pomice.Timescale):
+        if self._filter and isinstance(self._filter, Timescale):
             difference = difference * self._filter.speed * self._filter.rate
 
         position = self._last_position + difference
