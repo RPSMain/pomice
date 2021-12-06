@@ -305,3 +305,8 @@ class Player(VoiceProtocol):
             await self._node.send(op="seek", guildId=str(self.guild.id), position=position)
         self._filter = filter
         return filter
+
+    async def reset_filter(self):
+        """Resets the current filter of the player."""
+        await self.set_filter(Filter.none())
+        self._filter = None
