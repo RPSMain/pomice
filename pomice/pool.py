@@ -90,7 +90,8 @@ class Node:
         self._headers = {
             "Authorization": self._password,
             "User-Id": str(self._bot.user.id),
-            "Client-Name": f"Pomice/{__version__}"
+            "Client-Name": f"Pomice/{__version__}",
+            "Resume-Key": "myResumeKey"
         }
 
         self._players: Dict[int, Player] = {}
@@ -226,6 +227,7 @@ class Node:
             )
             self._task = self._bot.loop.create_task(self._listen())
             self._available = True
+            await self.send(op='configureResuming', key="myResumeKey", timeout=60)
             return self
         except aiohttp.WSServerHandshakeError:
             raise NodeConnectionFailure(
