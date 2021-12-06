@@ -30,7 +30,7 @@ class Equalizer(Filter):
         self.eq = self._factory(levels)
         self.raw = levels
         self._name = name
-        self.payload = {}
+        self.payload = {"equalizer": self.eq}
 
     @property
     def name(self):
