@@ -11,7 +11,6 @@ class Filter:
     """
     def __init__(self, payload=None):
         self.payload = payload
-        self.name = None
 
     @classmethod
     def none(cls):
