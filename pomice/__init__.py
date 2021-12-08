@@ -1,4 +1,11 @@
-"""Pomice wrapper for Lavalink, made possible by cloudwithax 2021"""
+"""
+Pomice
+------
+Wrapper for Lavalink
+
+:copyright: 2021 couldwithax
+:license: GPL
+"""
 import discord
 
 if not discord.__version__.startswith("2.0"):
